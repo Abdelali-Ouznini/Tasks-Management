@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tasks Management</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">/* Apply styles to the tab widget */
+QTabWidget {
+   font: 87 10pt &quot;Segoe UI Black&quot;;
+    background-color: #f0f0f0;
+    
+}
+
+/* Style the individual tabs */
+QTabWidget::tab-bar {
+    alignment: left;
+}
+
+QTabBar::tab {
+    background-color: #222;
+    color: #fff;
+    padding: 8px 20px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #3498db;
+}
+
+QTabBar::tab:hover {
+    background-color: #555;
+}
+
+/* Style the content area of the tab widget */
+QTabWidget::pane {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+</string>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>All Data</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="styleSheet">
+             <string notr="true">font: 87 10pt &quot;Segoe UI Black&quot;;
+padding:5px;</string>
+            </property>
+            <property name="text">
+             <string>Search By:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <property name="styleSheet">
+             <string notr="true">/* Apply styles to the QComboBox */
+QComboBox {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background-color: #fff;
+    color: #333; 
+	font: 11pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #ccc;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+QComboBox::down-arrow {
+    image: url(:/images/down_arrow.png);
+}
+
+QComboBox::down-arrow:hover {
+    image: url(:/images/down_arrow_hover.png);
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    selection-background-color: #3498db;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 8px;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #3498db;
+    color: #fff;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #555;
+    color: #fff;
+}
+</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>status</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>date</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>task</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="styleSheet">
+             <string notr="true">padding:5px;
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="search_btn">
+            <property name="styleSheet">
+             <string notr="true">/* Normal state */
+QPushButton {
+font: 87 10pt &quot;Segoe UI Black&quot;;
+
+    background-color: #007BFF; /* Blue button background color */
+    color: #FFFFFF; /* Text color */
+    border: 2px solid #007BFF; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding around the text */
+}
+
+/* Hover state */
+QPushButton:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    border: 2px solid #0056b3;
+}
+
+/* Pressed state */
+QPushButton:pressed {
+    background-color: #003d80; /* Even darker blue when pressed */
+    border: 2px solid #003d80;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #bfbfbf; /* Light gray when disabled */
+    color: #666666;
+    border: 2px solid #bfbfbf;
+}
+
+/* Focus state */
+QPushButton:focus {
+    border: 2px solid #0056b3; /* Darker blue when focused */
+    outline: none; /* Removes the focus outline */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Search</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="table">
+          <property name="styleSheet">
+           <string notr="true">QTableWidget {
+    
+	font: 12pt &quot;MS Shell Dlg 2&quot;;
+    background-color: #f5f5f5; /* Background color of the table */
+    alternate-background-color: #e0e0e0; /* Alternate row background color */
+    color: #333; /* Text color */
+    border: 1px solid #ccc; /* Border color and width */
+    selection-background-color: #4f93e3; /* Selected row background color */
+    selection-color: white; /* Selected row text color */
+}
+
+QTableWidget::item {
+    padding: 5px; /* Padding within each cell */
+}
+
+QHeaderView::section {
+	
+	font: 75 14pt &quot;MS Shell Dlg 2&quot;;
+    background-color: #ddd; /* Header background color */
+    color: #333; /* Header text color */
+    padding: 5px; /* Padding within each header section */
+    border: 1px solid #ccc; /* Header border color and width */
+    border-top: none; /* Remove top border */
+    border-left: none; /* Remove left border */
+    border-right: none; /* Remove right border */
+}
+
+QHeaderView::section:checked {
+    background-color: #4f93e3; /* Checked header background color */
+    color: white; /* Checked header text color */
+}
+</string>
+          </property>
+          <column>
+           <property name="text">
+            <string>id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>task</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Completed</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>date</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="refresh_btn">
+            <property name="styleSheet">
+             <string notr="true">/* Normal state */
+QPushButton {
+font: 87 10pt &quot;Segoe UI Black&quot;;
+
+    background-color: #007BFF; /* Blue button background color */
+    color: #FFFFFF; /* Text color */
+    border: 2px solid #007BFF; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding around the text */
+}
+
+/* Hover state */
+QPushButton:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    border: 2px solid #0056b3;
+}
+
+/* Pressed state */
+QPushButton:pressed {
+    background-color: #003d80; /* Even darker blue when pressed */
+    border: 2px solid #003d80;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #bfbfbf; /* Light gray when disabled */
+    color: #666666;
+    border: 2px solid #bfbfbf;
+}
+
+/* Focus state */
+QPushButton:focus {
+    border: 2px solid #0056b3; /* Darker blue when focused */
+    outline: none; /* Removes the focus outline */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Refresh</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Add Data</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QFrame" name="frame_8">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <property name="leftMargin">
+            <number>200</number>
+           </property>
+           <property name="rightMargin">
+            <number>200</number>
+           </property>
+           <item>
+            <widget class="QSplitter" name="splitter">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <widget class="QFrame" name="frame">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="styleSheet">
+                  <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+</string>
+                 </property>
+                 <property name="text">
+                  <string>task:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPlainTextEdit" name="ptxt">
+                 <property name="styleSheet">
+                  <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QFrame" name="frame_2">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="styleSheet">
+                  <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>status:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="status_combo">
+                 <property name="styleSheet">
+                  <string notr="true">padding:5px;
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>YES</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>NO</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QFrame" name="frame_3">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="styleSheet">
+                  <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>date:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="dateEdit">
+                 <property name="styleSheet">
+                  <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+padding: 5px;</string>
+                 </property>
+                 <property name="displayFormat">
+                  <string>yyyy/M/d</string>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>2023</year>
+                   <month>1</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QFrame" name="frame_4">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <property name="leftMargin">
+                <number>9</number>
+               </property>
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="submit_btn">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string/>
+                 </property>
+                 <property name="whatsThis">
+                  <string/>
+                 </property>
+                 <property name="accessibleName">
+                  <string/>
+                 </property>
+                 <property name="accessibleDescription">
+                  <string/>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">/* Normal state */
+QPushButton {
+font: 87 10pt &quot;Segoe UI Black&quot;;
+
+    background-color: #007BFF; /* Blue button background color */
+    color: #FFFFFF; /* Text color */
+    border: 2px solid #007BFF; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding around the text */
+}
+
+/* Hover state */
+QPushButton:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    border: 2px solid #0056b3;
+}
+
+/* Pressed state */
+QPushButton:pressed {
+    background-color: #003d80; /* Even darker blue when pressed */
+    border: 2px solid #003d80;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #bfbfbf; /* Light gray when disabled */
+    color: #666666;
+    border: 2px solid #bfbfbf;
+}
+
+/* Focus state */
+QPushButton:focus {
+    border: 2px solid #0056b3; /* Darker blue when focused */
+    outline: none; /* Removes the focus outline */
+}
+</string>
+                 </property>
+                 <property name="text">
+                  <string>Submit</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Edit Data</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QFrame" name="frame_7">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <property name="horizontalSpacing">
+            <number>60</number>
+           </property>
+           <item row="0" column="1">
+            <widget class="QFrame" name="frame_6">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QFormLayout" name="formLayout_2">
+              <property name="horizontalSpacing">
+               <number>20</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>50</number>
+              </property>
+              <property name="topMargin">
+               <number>9</number>
+              </property>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_8">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 127);</string>
+                </property>
+                <property name="text">
+                 <string>Update by Id:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="update_spin">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="update_btn">
+                <property name="styleSheet">
+                 <string notr="true">/* Normal state */
+QPushButton {
+font: 87 10pt &quot;Segoe UI Black&quot;;
+
+    background-color: #007BFF; /* Blue button background color */
+    color: #FFFFFF; /* Text color */
+    border: 2px solid #007BFF; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding around the text */
+}
+
+/* Hover state */
+QPushButton:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    border: 2px solid #0056b3;
+}
+
+/* Pressed state */
+QPushButton:pressed {
+    background-color: #003d80; /* Even darker blue when pressed */
+    border: 2px solid #003d80;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #bfbfbf; /* Light gray when disabled */
+    color: #666666;
+    border: 2px solid #bfbfbf;
+}
+
+/* Focus state */
+QPushButton:focus {
+    border: 2px solid #0056b3; /* Darker blue when focused */
+    outline: none; /* Removes the focus outline */
+}
+</string>
+                </property>
+                <property name="text">
+                 <string>Update</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="label_9">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(213, 242, 255);</string>
+                </property>
+                <property name="text">
+                 <string>UPDATE </string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_10">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 127);</string>
+                </property>
+                <property name="text">
+                 <string>Status:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="status_combo_update">
+                <property name="styleSheet">
+                 <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>YES</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>NO</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame_5">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <property name="horizontalSpacing">
+               <number>20</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>50</number>
+              </property>
+              <property name="topMargin">
+               <number>9</number>
+              </property>
+              <property name="rightMargin">
+               <number>9</number>
+              </property>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 127);</string>
+                </property>
+                <property name="text">
+                 <string>Delete by Id:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="spinBox">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="delete_btn">
+                <property name="styleSheet">
+                 <string notr="true">/* Normal state */
+QPushButton {
+font: 87 10pt &quot;Segoe UI Black&quot;;
+
+    background-color: #007BFF; /* Blue button background color */
+    color: #FFFFFF; /* Text color */
+    border: 2px solid #007BFF; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 16px; /* Padding around the text */
+}
+
+/* Hover state */
+QPushButton:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
+    border: 2px solid #0056b3;
+}
+
+/* Pressed state */
+QPushButton:pressed {
+    background-color: #003d80; /* Even darker blue when pressed */
+    border: 2px solid #003d80;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #bfbfbf; /* Light gray when disabled */
+    color: #666666;
+    border: 2px solid #bfbfbf;
+}
+
+/* Focus state */
+QPushButton:focus {
+    border: 2px solid #0056b3; /* Darker blue when focused */
+    outline: none; /* Removes the focus outline */
+}
+</string>
+                </property>
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="label_7">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(213, 242, 255);</string>
+                </property>
+                <property name="text">
+                 <string>DELETE </string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
